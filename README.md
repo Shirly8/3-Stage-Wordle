@@ -12,7 +12,7 @@ Learning how to use JavaScript to build a Wordle App without any assistance
 * 5 guess attempt
 * Letter box appears after every guess
 
-![Stage1.png](https://github.com/Shirly8/3-Stage-Wordle/blob/35122f7e162adace5b5a40a6394963154def1c78/Stage1.png))
+[![Stage1.png](https://github.com/Shirly8/3-Stage-Wordle/blob/aafd73dd9575dbe02207f66de6f394f879ade375/Part1.png)
 
 
 ## STAGE 2: Losing state and static grid + shuffle
@@ -21,10 +21,10 @@ Learning how to use JavaScript to build a Wordle App without any assistance
 * Load grid element and be able to place the word in the grid
 * Max-Length of 5 characters
 
-![STAGE2]([https://github.com/Shirly8/Wisest/blob/fc80adfcae4cde18dabf00b5d1b315d36889df1f/Gif%20Demonstration.gif](https://github.com/Shirly8/3-Stage-Wordle/blob/24f4eb5d516cfa227479186b83b5033b4932a5f2/Stage2.png))
+[![Stage2.png](https://github.com/Shirly8/3-Stage-Wordle/blob/aafd73dd9575dbe02207f66de6f394f879ade375/Part2.png)
 
 ## STAGE 3; ACTUAL WORLDE
 * Getting rid of input field and having input onto the grid
 * Checking for wordle validation after entry at every row
 
-![STAGE3]([https://github.com/Shirly8/Wisest/blob/fc80adfcae4cde18dabf00b5d1b315d36889df1f/Gif%20Demonstration.gif](https://github.com/Shirly8/3-Stage-Wordle/blob/24f4eb5d516cfa227479186b83b5033b4932a5f2/Stage3.png))
+[![Part3.png](https://github.com/Shirly8/3-Stage-Wordle/blob/aafd73dd9575dbe02207f66de6f394f879ade375/Part3.png)
