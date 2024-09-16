@@ -1,0 +1,114 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Wordle.css">
+</head>
+<body>
+    
+  <h1>WORDLE</h1>
+  <h2 id="randomword"></h2>
+  
+  <div id="guessed"></div>
+  
+  <div id="guessBox"></div>
+  
+
+  <script>    
+    const randomword = document.querySelector("#randomword");
+    const guessed = document.querySelector("#guessed");
+
+    const wordList = ['earth', 'place', 'crane', 'audio', 'house'];
+    const finalWord = wordList[Math.floor(Math.random() * wordList.length)];
+    const scrambled = shuffleWord(finalWord);
+
+    randomword.innerHTML = scrambled;
+    let attempt = 5;
+    let position = 0;
+    let word = '';
+
+    // Generate 25 input boxes (5 rows of 5 boxes)
+    for (let i = 0; i < 25; i++) {
+      guessed.innerHTML += `<input id="eachword" maxlength="1" position="${i}"/>`;
+    }
+
+    // Event listener to move between input boxes
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', () => {
+        if (input.value) {
+          word += input.value.toLowerCase();
+          position += 1;
+
+          // Move to the next box
+          if (index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          }
+
+          // Check word after every 5 inputs
+          if (position % 5 === 0) {
+            attempt--;
+            checkWordle();
+          }
+        }
+      });
+    });
+
+    // Check the guess against the final word
+    function checkWordle() {
+      const guessbox = document.querySelector("#guessBox");
+
+      // Compare current word with the final word
+      for (let i = 0; i < word.length; i++) {
+        const gridElement = document.querySelector(`[position="${position - 5 + i}"]`);
+        
+        if (finalWord.includes(word[i])) {
+          gridElement.style.backgroundColor = 'yellow'; // Correct letter, wrong position
+        }
+
+        if (word[i] === finalWord[i]) {
+          gridElement.style.backgroundColor = 'lightgreen'; // Correct letter, correct position
+        }
+      }
+
+      // Check for win or loss conditions
+      if (word === finalWord) {
+        guessbox.innerHTML = `<p id="finish" style="background-color: lightgreen; border: 1px solid green">You WIN!</p>`;
+        disableInputs();
+        return;
+      }
+
+      if (attempt === 0) {
+        guessbox.innerHTML = `<p id="finish" style="background-color: red; border: 1px solid green">You LOST!</p>`;
+        disableInputs();
+        return;
+      }
+
+      // Reset word and continue to the next attempt
+      word = '';
+    }
+
+    // Disable all inputs if game is over
+    function disableInputs() {
+      inputs.forEach(input => {
+        input.disabled = true;
+      });
+    }
+
+    // Fisher-Yates shuffle algorithm
+    function shuffleWord(word) {
+      let randomized = word.split('');
+
+      for (let i = randomized.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [randomized[i], randomized[j]] = [randomized[j], randomized[i]];
+      }
+
+      return randomized.join('');
+    }
+  
+  </script>
+
+</body>
+</html>

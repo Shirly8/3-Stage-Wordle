@@ -1,0 +1,104 @@
+
+<!--
+TO GET ELEMENT: document.querySelector("#board");
+-->
+
+<!DOCTYPE html> <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Wordle.css">
+</head>
+<body>
+    
+  <h1>WORDLE</h1>
+  <h2 id = "randomword"> </h2>
+  
+  <div id = "guessed"></div>
+  
+  <div id = "guessBox">
+    <input id = "guessinput"></input>
+    <button id = "button" onClick = submit()>Submit</button>
+  </div>
+
+
+  
+
+  <script>    
+    randomword = document.querySelector("#randomword")
+    guessbox = document.querySelector("#guessBox")
+    guessed = document.querySelector("#guessed")
+
+    wordList = ['earth', 'place', 'crane', 'audio', 'house'];
+    finalWord = wordList[Math.floor(Math.random()* wordList.length)] //Since it's floor no need to -1
+    let scrambled = shuffleWord(finalWord)
+
+ 
+    randomword.innerHTML  = scrambled
+    attempt = 5;
+
+    for (let i = 0; i < 25; i++) {
+      guessed.innerHTML += `<div id = "eachword"
+        position = "${i}""
+        </div>`
+    }
+
+    //Tells what grid to put the word - +5, +10, +15
+    filledword = 0;
+
+
+    // Use Fischer-Yates Algorithm
+    function shuffleWord(word) {
+      let randomized = word.split('')
+
+      for (let i = randomized.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [randomized[i], randomized[j]] = [randomized[j], randomized[i]];
+      }
+      return randomized.join('')
+    }
+
+    function submit() {
+      input = document.querySelector("#guessinput").value
+      input = input.toLowerCase()
+
+      if (input.length > 5) {
+        guessBox.innerHTML += "<p> 5 CHARACTERS ONLY. Please try again </p>"
+        document.querySelector("#guessinput").value = '';
+
+      }else {
+          for (let i =0; i < input.length; i++) {
+            let gridElement = document.querySelector(`[position="${filledword +i}"]`)
+            gridElement.innerHTML = input[i] 
+          
+            if (input[i] == finalWord[i]) {
+              gridElement.style.backgroundColor = 'lightgreen'
+            }else if (finalWord.includes(input[i])) {
+              gridElement.style.backgroundColor = 'yellow'
+            }
+          }
+          
+        document.querySelector("#guessinput").value = '';
+        filledword += 5;
+        attempt -= 1;
+
+
+        
+      if (input == finalWord) {
+        guessbox.innerHTML = `<p id = "finish" style="background-color: lightgreen; border: 1px solid green">You WIN!</p>`
+        return
+      }
+        if (attempt == 0) {
+        guessbox.innerHTML = `<p id = "finish" style="background-color: red; border: 1px solid green">You LOST!</p>`
+        return
+      }
+    }    
+  }
+
+  </script>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,84 @@
+
+<!--
+TO GET ELEMENT: document.querySelector("#board");
+-->
+
+<!DOCTYPE html> <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Wordle.css">
+</head>
+<body>
+    
+  <h1>WORDLE</h1>
+  <h2 id = "randomword"> </h2>
+  
+  <div id = "guessed"></div>
+  
+  <div id = "guessBox">
+    <input id = "guessinput"></input>
+    <button id = "button" onClick = submit()>Submit</button>
+  </div>
+
+
+  
+
+  <script>
+    randomword = document.querySelector("#randomword")
+    guessbox = document.querySelector("#guessBox")
+    guessed = document.querySelector("#guessed")
+
+
+
+    finalWord = "dream"
+    scrambled = "rmeda"
+
+ 
+    randomword.innerHTML  = scrambled
+    attempt = 5;
+
+
+
+    function submit() {
+      attempt -= 1;
+
+      //Input - Placing input to Document
+      input = document.querySelector("#guessinput").value
+      input = input.toLowerCase()
+
+      //Creates a placeholder string that the actual document will pick up in the end
+        let perword = `<div id = "perword">`
+
+          for (let i =0; i < input.length; i++) {
+          
+            if (input[i] == finalWord[i]) {
+              perword +=  `<p style = "background-color: lightgreen;" id = "eachword">${input[i]}<\p>`
+            }else {
+              perword += `<p id = "eachword">${input[i]}<\p>`
+            }
+          }
+          
+        perword += `</div>`
+        guessed.innerHTML += perword
+        document.querySelector("#guessinput").value = '';
+
+
+      //EDGE CASES - WIN OR LOSE
+      if (input == finalWord) {
+        guessbox.innerHTML = `<p id = "finish" style="background-color: lightgreen; border: 1px solid green">You WIN!</p>`
+        return
+      }
+        if (attempt == 0) {
+        guessbox.innerHTML = `<p id = "finish" style="background-color: red; border: 1px solid green">You LOST!</p>`
+        return
+      }
+    }    
+
+  </script>
+
+
+
+</body>
+</html>
+
