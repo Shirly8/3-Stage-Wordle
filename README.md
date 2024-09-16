@@ -12,7 +12,7 @@ Learning how to use JavaScript to build a Wordle App without any assistance
 * 5 guess attempt
 * Letter box appears after every guess
 
-![Stage1.png](https://github.com/Shirly8/3-Stage-Wordle/blob/24f4eb5d516cfa227479186b83b5033b4932a5f2/Stage1.png)
+![Stage1.png](https://github.com/Shirly8/3-Stage-Wordle/blob/35122f7e162adace5b5a40a6394963154def1c78/Stage1.png))
 
 
 ## STAGE 2: Losing state and static grid + shuffle
